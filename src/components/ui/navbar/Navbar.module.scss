@@ -1,0 +1,17 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.navbar {
+  display: flex;
+  gap: 34px;
+  padding: 0;
+  list-style: none;
+
+  &Item {
+    color: $white;
+    @include text-preset-8;
+    letter-spacing: 2px;
+    padding: 6px 0;
+    text-decoration: none;
+  }
+}
