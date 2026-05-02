@@ -33,3 +33,19 @@ img {
   display: block;
   max-inline-size: 100%;
 }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: $lightgray;
+  @include text-preset-9;
+}
+
+.container {
+  width: clamp(327px, 90%, 1110px);
+  margin: 0 auto;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
