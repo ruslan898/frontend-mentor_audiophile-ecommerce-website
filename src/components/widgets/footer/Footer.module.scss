@@ -1,0 +1,101 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.footer {
+  min-height: 300px;
+  padding-bottom: 38px;
+  background-color: $black-1;
+  color: $gray;
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .footerNavbar {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &Top,
+  &Bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .topLine {
+    width: 100px;
+    height: 4px;
+    background-color: $orange;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding-bottom: 46px;
+
+    &Wrapper {
+      gap: 80px;
+      text-align: left;
+    }
+
+    .footerNavbar {
+      flex-direction: row;
+      gap: 34px;
+    }
+
+    &Top {
+      align-items: start;
+      gap: 32px;
+    }
+
+    &Bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .topLine {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding-bottom: 48px;
+
+    &Wrapper {
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 56px;
+    }
+
+    &Main {
+      display: flex;
+      gap: 140px;
+    }
+
+    &Top {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &Bottom {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .topLine {
+      margin-bottom: 14px;
+    }
+
+    .copyright {
+      margin-top: 20px;
+    }
+  }
+}

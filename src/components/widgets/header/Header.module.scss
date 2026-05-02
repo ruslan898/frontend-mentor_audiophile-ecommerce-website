@@ -1,0 +1,63 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.header {
+  background-color: $black-2;
+
+  &Wrapper {
+    min-height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    background-color: transparent;
+  }
+
+  img {
+    max-height: 25px;
+  }
+}
+
+.burgerMenuBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 0;
+
+  span {
+    width: 16px;
+    height: 3px;
+    background-color: $white;
+  }
+}
+
+.cartBtn {
+  padding: 6px 0;
+}
+
+@media (min-width: 768px) {
+  .header {
+    &Wrapper {
+      justify-content: start;
+      gap: 42px;
+    }
+  }
+
+  .cartBtn {
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    &Wrapper {
+      justify-content: space-between;
+    }
+  }
+
+  .cartBtn {
+    margin: 0;
+  }
+}
