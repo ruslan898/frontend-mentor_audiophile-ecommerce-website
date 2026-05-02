@@ -1,0 +1,66 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.title {
+  color: $black-2;
+  text-transform: uppercase;
+
+  span {
+    color: $orange
+  }
+
+  &-xl {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 1.29px;
+  }
+
+  &-lg,
+  &-md {
+    @include text-preset-4;
+  }
+
+  &-lg {
+    letter-spacing: 1px;
+  }
+
+  &-sm {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1.07px;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    &-xl {
+      @include text-preset-1;
+    }
+
+    &-lg {
+      @include text-preset-2;
+    }
+
+    &-md {
+      @include text-preset-4;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    &-xl {
+      @include text-preset-1;
+    }
+
+    &-lg {
+      @include text-preset-2;
+    }
+
+    &-md {
+      @include text-preset-4;
+    }
+  }
+}
