@@ -2,10 +2,12 @@
 @use '/src/styles/mixins.scss' as *;
 
 .btn {
+  max-width: 160px;
   padding: 15px 30px;
   text-transform: uppercase;
   @include text-preset-8;
   display: flex;
+  align-items: center;
   gap: 13px;
   transition: 0.2s all;
 
@@ -30,11 +32,17 @@
   }
 
   &-alternative {
+    padding: 5px 10px;
     background-color: transparent;
-    color: $gray;
+    color: $black-2;
 
     &:hover {
       color: $orange;
+    }
+
+    img {
+      width: 5px;
+      height: 10px;
     }
   }
 }
