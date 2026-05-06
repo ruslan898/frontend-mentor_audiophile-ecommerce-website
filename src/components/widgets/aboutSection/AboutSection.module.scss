@@ -1,0 +1,61 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.aboutSection {
+  text-align: center;
+  padding-bottom: 120px;
+
+  &Wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.imageBox {
+  img {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .description {
+    padding: 0 50px;
+  }
+
+  .imageBox {
+    img {
+      max-width: 1050px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .aboutSection {
+    &Wrapper {
+      text-align: left;
+      grid-template-columns: 1fr 1fr;
+      gap: 160px;
+      direction: rtl;
+      align-items: center;
+    }
+  }
+
+  .description {
+    padding: 0;
+  }
+
+  .imageBox {
+    img {
+      max-width: 500px;
+    }
+  }
+}
