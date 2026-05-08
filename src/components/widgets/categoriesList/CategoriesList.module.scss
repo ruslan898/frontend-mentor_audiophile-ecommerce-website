@@ -1,0 +1,20 @@
+.categoriesListWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 327px);
+  justify-content: center;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .categoriesListWrapper {
+    grid-template-columns: repeat(auto-fit, 223px);
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categoriesListWrapper {
+    grid-template-columns: repeat(auto-fit, 350px);
+    gap: 30px;
+  }
+}
