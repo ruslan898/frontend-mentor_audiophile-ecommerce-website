@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
 import styles from './Header.module.scss';
 import logoIcon from '../../../assets/shared/desktop/logo.svg';
@@ -7,6 +7,7 @@ import Navbar from '../../ui/navbar/Navbar';
 
 export default function Header() {
   const windowWidth = useWindowWidth();
+  const path = useLocation().pathname;
 
   return (
     <header className={styles.header}>
@@ -37,6 +38,7 @@ export default function Header() {
           >
             <img src={cartIcon} alt="Cart" className={styles.cartImg} />
           </button>
+          {path === '/' && <div className={styles.divider}></div>}
         </div>
       </div>
     </header>
