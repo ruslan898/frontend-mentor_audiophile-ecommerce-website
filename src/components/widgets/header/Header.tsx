@@ -38,7 +38,10 @@ export default function Header() {
           >
             <img src={cartIcon} alt="Cart" className={styles.cartImg} />
           </button>
-          {path === '/' && <div className={styles.divider}></div>}
+          {path === '/' ||
+            (path.includes('category') && (
+              <div className={styles.divider}></div>
+            ))}
         </div>
       </div>
     </header>
