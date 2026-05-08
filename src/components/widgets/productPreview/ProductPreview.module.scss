@@ -1,0 +1,61 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.productPreview {
+  text-align: center;
+
+  &Wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.overline {
+  color: $orange;
+  @include text-preset-7;
+}
+
+.imageBox {
+  img {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .imageBox {
+    img {
+      max-width: 900px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .productPreview {
+    &Wrapper {
+      text-align: left;
+      grid-template-columns: 1fr 1fr;
+      gap: 125px;
+      align-items: center;
+    }
+  }
+
+  .imageBox {
+    img {
+      max-width: 560px;
+    }
+  }
+
+  .description {
+    align-items: flex-start;
+  }
+}
