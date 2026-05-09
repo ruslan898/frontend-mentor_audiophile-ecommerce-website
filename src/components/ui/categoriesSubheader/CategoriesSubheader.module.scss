@@ -1,0 +1,27 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.categoriesSubheader {
+  min-height: 102px;
+  padding: 32px 20px;
+  background-color: $black-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .subheaderTitle {
+    color: $white;
+  }
+}
+
+@media (min-width: 768px) {
+  .categoriesSubheader {
+    min-height: 246px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categoriesSubheader {
+    min-height: 239px;
+  }
+}
