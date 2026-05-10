@@ -2,7 +2,6 @@
 @use '/src/styles/mixins.scss' as *;
 
 .categoryCard {
-  max-width: 350px;
   height: 217px;
   text-align: center;
   display: flex;
@@ -33,15 +32,12 @@
 
 @media (min-width: 768px) {
   .categoryCard {
-    // width: 223px;
     height: 276px;
   }
 }
 
 @media (min-width: 768px) {
   .categoryCard {
-    // width: 350px;
-
     &Inner {
       padding-bottom: 25px;
       height: 204px;

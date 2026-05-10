@@ -6,14 +6,16 @@ import categoryIconEarphones from '../../../assets/shared/desktop/image-category
 
 export default function CategoriesList() {
   return (
-    <section className={styles.categoriesList}>
-      <div className="container">
-        <div className={styles.categoriesListWrapper}>
-          <CategoryCard imgUrl={categoryIconHeadphones} title="Headphones" />
-          <CategoryCard imgUrl={categoryIconSpeakers} title="Speakers" />
-          <CategoryCard imgUrl={categoryIconEarphones} title="Earphones" />
-        </div>
-      </div>
-    </section>
+    <ul className={styles.categoriesList}>
+      <li>
+        <CategoryCard imgUrl={categoryIconHeadphones} title="Headphones" />
+      </li>
+      <li>
+        <CategoryCard imgUrl={categoryIconSpeakers} title="Speakers" />
+      </li>
+      <li>
+        <CategoryCard imgUrl={categoryIconEarphones} title="Earphones" />
+      </li>
+    </ul>
   );
 }
