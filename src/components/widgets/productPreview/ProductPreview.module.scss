@@ -46,6 +46,14 @@
       grid-template-columns: 1fr 1fr;
       gap: 125px;
       align-items: center;
+
+      &.reversed {
+        direction: rtl;
+
+        .description {
+          align-items: flex-end;
+        }
+      }
     }
   }
 

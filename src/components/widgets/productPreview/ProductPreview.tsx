@@ -3,11 +3,17 @@ import Button from '../../ui/button/Button';
 import styles from './ProductPreview.module.scss';
 import sectionImage from '../../../assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg';
 
-export default function ProductPreview() {
+type ProductPreviewProps = {
+  reversed?: boolean
+}
+
+export default function ProductPreview({ reversed = false }: ProductPreviewProps) {
   return (
     <section className={styles.productPreview}>
       <div className="container">
-        <div className={styles.productPreviewWrapper}>
+        <div
+          className={`${styles.productPreviewWrapper} ${reversed ? styles.reversed : ''}`}
+        >
           <div className={styles.imageBox}>
             <img src={sectionImage} alt="Headphones" />
           </div>
