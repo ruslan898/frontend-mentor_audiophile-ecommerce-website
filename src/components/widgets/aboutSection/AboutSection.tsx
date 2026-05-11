@@ -1,9 +1,9 @@
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
 import Title from '../../ui/title/Title';
 import styles from './AboutSection.module.scss';
-import imageBestGearMobile from '../../../assets/shared/mobile/image-best-gear.jpg';
-import imageBestGearTablet from '../../../assets/shared/tablet/image-best-gear.jpg';
-import imageBestGearDesktop from '../../../assets/shared/desktop/image-best-gear.jpg';
+import imageBestGearMobile from '/assets/shared/mobile/image-best-gear.jpg';
+import imageBestGearTablet from '/assets/shared/tablet/image-best-gear.jpg';
+import imageBestGearDesktop from '/assets/shared/desktop/image-best-gear.jpg';
 
 export default function AboutSection() {
   const windowWidth = useWindowWidth();

@@ -3,9 +3,9 @@ import styles from './ProductBanner.module.scss';
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
-import imagePrimaryMobile from '../../../assets/home/mobile/image-speaker-zx9.png';
-import imagePrimaryTablet from '../../../assets/home/tablet/image-speaker-zx9.png';
-import imagePrimaryDesktop from '../../../assets/home/desktop/image-speaker-zx9.png';
+import imagePrimaryMobile from '/assets/home/mobile/image-speaker-zx9.png';
+import imagePrimaryTablet from '/assets/home/tablet/image-speaker-zx9.png';
+import imagePrimaryDesktop from '/assets/home/desktop/image-speaker-zx9.png';
 
 type ProductBannerProps = {
   variant: 'primary' | 'secondary' | 'alternative';

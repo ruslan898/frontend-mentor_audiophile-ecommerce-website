@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
 import Navbar from '../../ui/navbar/Navbar';
 import SocialLinks from '../../ui/socialLinks/SocialLinks';
-import logoIcon from '../../../assets/shared/desktop/logo.svg';
+import logoIcon from '/assets/shared/desktop/logo.svg';
 import styles from './Footer.module.scss';
 
 export default function Footer() {

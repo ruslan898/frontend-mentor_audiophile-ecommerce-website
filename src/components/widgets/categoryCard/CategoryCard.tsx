@@ -1,8 +1,8 @@
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
 import styles from './CategoryCard.module.scss';
-import categoryIconHeadphones from '../../../assets/shared/desktop/image-category-thumbnail-headphones.png';
-import iconArrowRight from '../../../assets/shared/desktop/icon-arrow-right.svg';
+import categoryIconHeadphones from '/assets/shared/desktop/image-category-thumbnail-headphones.png';
+import iconArrowRight from '/assets/shared/desktop/icon-arrow-right.svg';
 
 type CategoryCardProps = {
   imgUrl: string;

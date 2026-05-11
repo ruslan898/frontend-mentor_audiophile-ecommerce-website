@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useWindowWidth } from '../../../hooks/useWindowWidth';
 import styles from './Header.module.scss';
-import logoIcon from '../../../assets/shared/desktop/logo.svg';
-import cartIcon from '../../../assets/shared/desktop/icon-cart.svg';
+import logoIcon from '/assets/shared/desktop/logo.svg';
+import cartIcon from '/assets/shared/desktop/icon-cart.svg';
 import Navbar from '../../ui/navbar/Navbar';
 
 export default function Header() {
