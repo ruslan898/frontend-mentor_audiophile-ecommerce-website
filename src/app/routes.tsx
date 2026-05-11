@@ -1,22 +1,32 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Layout from '../pages/Layout';
+import RootLayout from '../pages/RootLayout';
+import CategoryLayout from '../pages/CategoryLayout';
 import Home from '../pages/Home';
 import Category from '../pages/Category';
 import ProductDetail from '../pages/ProductDetail';
 import Checkout from '../pages/Checkout';
+import { loader } from '../utils';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <RootLayout />,
+    id: 'root-route',
+    loader: loader,
     children: [
       {
         index: true,
         element: <Home />,
       },
       {
-        path: 'category/:type',
-        element: <Category />,
+        path: 'category',
+        element: <CategoryLayout />,
+        children: [
+          {
+            path: ':type',
+            element: <Category />,
+          },
+        ],
       },
       {
         path: 'product-detail/:id',
