@@ -1,10 +1,10 @@
-type ImagePaths = {
+export type ImagePaths = {
   mobile: string,
   tablet: string,
   desktop: string
 }
 
-type OtherProduct = {
+export type OtherProduct = {
   image: ImagePaths
   name: string
   slug: string

@@ -1,12 +1,7 @@
 import { useWindowWidth } from './useWindowWidth';
+import type { ImagePaths } from '../types/types';
 
-type imgObj = {
-  mobile: string;
-  tablet: string;
-  desktop: string;
-};
-
-export function useImageByScreenSize(imgObj: imgObj) {
+export function useImageByScreenSize(imgObj: ImagePaths) {
   const windowWidth = useWindowWidth();
   const { mobile, tablet, desktop } = imgObj;
 
