@@ -8,6 +8,8 @@ import styles from './Footer.module.scss';
 export default function Footer() {
   const windowWidth = useWindowWidth();
 
+  const currentYear = new Date().getFullYear()
+
   if (windowWidth >= 1024) {
     return (
       <footer className={styles.footer}>
@@ -32,7 +34,7 @@ export default function Footer() {
               </div>
             </div>
             <p className={styles.copyright}>
-              Copyright 2021. All Rights Reserved
+              Copyright {currentYear}. All Rights Reserved
             </p>
           </div>
         </div>
@@ -59,7 +61,7 @@ export default function Footer() {
           </div>
           <div className={styles.footerBottom}>
             <p className={styles.copyright}>
-              Copyright 2021. All Rights Reserved
+              Copyright {currentYear}. All Rights Reserved
             </p>
             <SocialLinks />
           </div>
