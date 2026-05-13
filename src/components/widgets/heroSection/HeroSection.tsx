@@ -26,7 +26,7 @@ export default function HeroSection() {
     (obj: Product) => obj.name.toLowerCase() === PRODUCT_NAME.toLowerCase(),
   );
 
-  const { name, new: isNew, id: slug } = productInfo;
+  const { name, new: isNew, slug } = productInfo;
 
   return (
     <section
