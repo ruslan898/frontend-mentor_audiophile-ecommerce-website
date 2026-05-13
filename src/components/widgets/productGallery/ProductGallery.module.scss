@@ -1,4 +1,4 @@
-.productGallery {
+.productGalleryWrapper {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 200px);
@@ -21,7 +21,7 @@
 }
 
 @media (min-width: 768px) {
-  .productGallery {
+  .productGalleryWrapper {
     grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(2, 200px);
     gap: 20px;
@@ -36,7 +36,7 @@
 }
 
 @media (min-width: 1024px) {
-  .productGallery {
+  .productGalleryWrapper {
     grid-template-rows: repeat(2, 300px);
   }
 }
