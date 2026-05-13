@@ -13,5 +13,11 @@
     letter-spacing: 2px;
     padding: 6px 0;
     text-decoration: none;
+    transition: 0.2s all;
+
+    &:hover {
+      color: $orange;
+    }
   }
+
 }
