@@ -15,7 +15,7 @@ export default function ProductDetail() {
     : {};
 
   return (
-    <main className="mainContent mainContent">
+    <main className="mainContent pad-y-120">
       <ProductDetailBlock productData={productData} />
       <ProductGallery imagesObj={productData.gallery} />
       <OtherProductsList dataArr={productData.others} />

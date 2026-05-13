@@ -5,7 +5,7 @@ import AboutSection from '../components/widgets/aboutSection/AboutSection';
 
 export default function Home() {
   return (
-    <main className="mainContent">
+    <main className="mainContent mainContentHome">
       <HeroSection />
       <CategoriesList />
       <ProductBannerList />

@@ -59,4 +59,9 @@ a {
   display: flex;
   flex-direction: column;
   gap: 120px;
+  padding: 120px 0;
+
+  &Home {
+    padding-top: 0;
+  }
 }
