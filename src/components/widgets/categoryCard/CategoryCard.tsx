@@ -7,11 +7,13 @@ import iconArrowRight from '/assets/shared/desktop/icon-arrow-right.svg';
 type CategoryCardProps = {
   imgUrl: string;
   title: string;
+  href: string
 };
 
 export default function CategoryCard({
   imgUrl = categoryIconHeadphones,
   title = 'Headphones',
+  href
 }: CategoryCardProps) {
   return (
     <div className={styles.categoryCard}>
@@ -24,7 +26,7 @@ export default function CategoryCard({
         <Title level={2} variant="sm">
           {title}
         </Title>
-        <Button variant="text">
+        <Button href={href} variant="text">
           Shop
           <img src={iconArrowRight} alt="Arrow right" />
         </Button>
