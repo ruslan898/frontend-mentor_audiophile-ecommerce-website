@@ -1,13 +1,22 @@
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
 import styles from './ProductPreview.module.scss';
-import sectionImage from '../../../assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg';
+import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
+import type { Product } from '../../../types/types';
 
 type ProductPreviewProps = {
-  reversed?: boolean
-}
+  productData: Product;
+  reversed?: boolean;
+};
 
-export default function ProductPreview({ reversed = false }: ProductPreviewProps) {
+export default function ProductPreview({
+  productData,
+  reversed = false,
+}: ProductPreviewProps) {
+  const { name, description, new: isNew, categoryImage, slug } = productData;
+
+  const image = useImageByScreenSize(categoryImage);
+
   return (
     <section className={styles.productPreview}>
       <div className="container">
@@ -15,19 +24,17 @@ export default function ProductPreview({ reversed = false }: ProductPreviewProps
           className={`${styles.productPreviewWrapper} ${reversed ? styles.reversed : ''}`}
         >
           <div className={styles.imageBox}>
-            <img src={sectionImage} alt="Headphones" />
+            <img src={image} alt="Headphones" />
           </div>
           <div className={styles.description}>
-            <p className={styles.overline}>New product</p>
+            {isNew && <p className={styles.overline}>New product</p>}
             <Title level={2} variant="lg">
-              XX99 Mark II Headphones
+              {name}
             </Title>
-            <p className={styles.text}>
-              The new XX99 Mark II headphones is the pinnacle of pristine audio.
-              It redefines your premium headphone experience by reproducing the
-              balanced depth and precision of studio-quality sound.
-            </p>
-            <Button variant="filled">See product</Button>
+            <p className={styles.text}>{description}</p>
+            <Button href={`/product-detail/${slug}`} variant="filled">
+              See product
+            </Button>
           </div>
         </div>
       </div>
