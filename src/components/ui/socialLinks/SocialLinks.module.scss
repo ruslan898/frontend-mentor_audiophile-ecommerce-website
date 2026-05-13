@@ -1,11 +1,17 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
 .socialLinks {
   padding: 0;
   list-style: none;
   display: flex;
   gap: 16px;
 
-  img {
-    width: 24px;
-    height: 24px;
+  a {
+    &:hover {
+      svg path {
+        fill: $orange;
+      }
+    }
   }
 }
