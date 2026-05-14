@@ -1,7 +1,7 @@
 @use '/src/styles/variables.scss' as *;
 @use '/src/styles/mixins.scss' as *;
 
-.productDetailBlock {
+.productDetailBlockWrapper {
   display: flex;
   flex-direction: column;
   gap: 88px;
@@ -75,6 +75,10 @@
       width: 16px;
       height: 18px;
       background-color: transparent;
+
+      &:hover {
+        color: $orange
+      }
     }
 
     &Number {
@@ -83,15 +87,14 @@
   }
 }
 
-
-
 .bottom {
   display: grid;
   grid-template-columns: 1fr;
   gap: 88px;
 }
 
-.features, .set {
+.features,
+.set {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -114,15 +117,8 @@
   }
 }
 
-
-
-
-
-
-
-
 @media (min-width: 768px) {
-  .productDetailBlock {
+  .productDetailBlockWrapper {
     gap: 120px;
   }
 
@@ -155,7 +151,7 @@
     }
 
     .productTitle {
-      max-width: 10ch;
+      max-width: 12ch;
     }
 
     .price {
@@ -188,7 +184,6 @@
     }
   }
 
-
   .featuresText {
     max-width: 80ch;
   }
@@ -196,27 +191,11 @@
   .set {
     flex-direction: row;
     gap: 200px;
-
-
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (min-width: 1024px) {
-  .productDetailBlock {
+  .productDetailBlockWrapper {
     gap: 160px;
   }
 
@@ -231,7 +210,6 @@
     }
   }
 
-
   .bottom {
     grid-template-columns: 2fr 1fr;
     gap: 125px;
@@ -241,7 +219,6 @@
     flex-direction: column;
     gap: 24px;
   }
-
 }
 
 @media (min-width: 1440px) {
