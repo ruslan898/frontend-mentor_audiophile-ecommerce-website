@@ -1,6 +1,7 @@
 import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import Header from '../components/widgets/header/Header';
 import Footer from '../components/widgets/footer/Footer';
+import MainContent from '../components/ui/mainContent/MainContent';
 
 export default function RootLayout() {
   const path = useLocation().pathname;
@@ -9,7 +10,9 @@ export default function RootLayout() {
     return (
       <>
         <ScrollRestoration />
-        <Outlet />
+        <MainContent>
+          <Outlet />
+        </MainContent>
         <Footer />
       </>
     );
@@ -19,7 +22,9 @@ export default function RootLayout() {
     <>
       <ScrollRestoration />
       <Header />
-      <Outlet />
+      <MainContent>
+        <Outlet />
+      </MainContent>
       <Footer />
     </>
   );
