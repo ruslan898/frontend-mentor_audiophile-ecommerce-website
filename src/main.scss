@@ -58,3 +58,13 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.backBtn {
+  background-color: transparent;
+}
