@@ -14,7 +14,7 @@ export default function ProductPreviewList() {
       <div className="container">
         <ul className={styles.productPreviewList}>
           {data.map((obj: Product) => (
-            <li>
+            <li key={obj.id}>
               <ProductPreview productData={obj} />
             </li>
           ))}

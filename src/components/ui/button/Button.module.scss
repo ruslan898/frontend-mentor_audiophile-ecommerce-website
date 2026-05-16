@@ -7,6 +7,7 @@
   text-transform: uppercase;
   @include text-preset-8;
   transition: 0.2s all;
+  text-align: center;
 
   &-filled {
     background-color: $orange;
