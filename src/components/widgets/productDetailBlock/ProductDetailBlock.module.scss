@@ -61,30 +61,6 @@
 .actions {
   display: flex;
   gap: 16px;
-
-  .amount {
-    min-width: 120px;
-    background-color: $gray;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-    &Btn {
-      width: 16px;
-      height: 18px;
-      background-color: transparent;
-
-      &:hover {
-        color: $orange
-      }
-    }
-
-    &Number {
-      @include text-preset-8;
-    }
-  }
 }
 
 .bottom {

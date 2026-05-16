@@ -1,5 +1,6 @@
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
+import CartAmount from '../../ui/cartAmount/CartAmount';
 import styles from './ProductDetailBlock.module.scss';
 import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
 import type { Product } from '../../../types/types';
@@ -50,15 +51,7 @@ export default function ProductDetailBlock({
               </div>
 
               <div className={styles.actions}>
-                <div className={styles.amount}>
-                  <button type="button" className={styles.amountBtn}>
-                    -
-                  </button>
-                  <span className={styles.amountNumber}>1</span>
-                  <button type="button" className={styles.amountBtn}>
-                    +
-                  </button>
-                </div>
+                <CartAmount variant='regular' />
                 <Button type="button" variant="filled">
                   Add to cart
                 </Button>
