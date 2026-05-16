@@ -34,6 +34,10 @@ img {
   max-inline-size: 100%;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   background-color: $lightgray;
@@ -53,15 +57,4 @@ button {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-.mainContent {
-  display: flex;
-  flex-direction: column;
-  gap: 120px;
-  padding: 120px 0;
-
-  &Home {
-    padding-top: 0;
-  }
 }

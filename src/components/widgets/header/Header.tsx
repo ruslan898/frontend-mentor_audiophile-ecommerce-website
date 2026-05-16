@@ -4,10 +4,13 @@ import styles from './Header.module.scss';
 import logoIcon from '/assets/shared/desktop/logo.svg';
 import cartIcon from '/assets/shared/desktop/icon-cart.svg';
 import Navbar from '../../ui/navbar/Navbar';
+import { useModalContext } from '../../../context/modal/ModalContext';
 
 export default function Header() {
   const windowWidth = useWindowWidth();
   const path = useLocation().pathname;
+
+  const { toggleOpen } = useModalContext();
 
   return (
     <header className={styles.header}>
@@ -35,6 +38,7 @@ export default function Header() {
             type="button"
             className={styles.cartBtn}
             aria-label="Open cart"
+            onClick={toggleOpen}
           >
             <img src={cartIcon} alt="Cart" className={styles.cartImg} />
           </button>
