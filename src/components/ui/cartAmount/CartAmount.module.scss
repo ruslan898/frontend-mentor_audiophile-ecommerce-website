@@ -1,0 +1,35 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.cartAmount {
+  background-color: $gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.regular {
+    min-width: 120px;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  &.cartModal {
+    min-width: 96px;
+    padding: 7px 10px;
+    gap: 12px;
+  }
+
+  &Btn {
+    width: 16px;
+    height: 18px;
+    background-color: transparent;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+
+  &Number {
+    @include text-preset-8;
+  }
+}
