@@ -1,26 +1,32 @@
 import styles from './ProductCard.module.scss';
-import imgMobile from '../../../assets/shared/mobile/image-zx7-speaker.jpg';
-import imgTablet from '../../../assets/shared/tablet/image-zx7-speaker.jpg';
-import imgDesktop from '../../../assets/shared/desktop/image-zx7-speaker.jpg';
-import { useWindowWidth } from '../../../hooks/useWindowWidth';
+
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
+import type { OtherProduct } from '../../../types/types';
+import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
 
-export default function ProductCard() {
-  const windowWidth = useWindowWidth();
+type ProductCardProps = {
+  productData: OtherProduct;
+};
 
-  const image =
-    windowWidth < 768 ? imgMobile : windowWidth < 1024 ? imgTablet : imgDesktop;
+export default function ProductCard({ productData }: ProductCardProps) {
+  const { name, slug, image } = productData ?? {};
+
+  const productImage = useImageByScreenSize(image);
 
   return (
     <div className={styles.productCard}>
       <div className={styles.imageBox}>
-        <img src={image} alt="An image of a product" />
+        <img src={productImage} alt="An image of a product" />
       </div>
       <Title level={3} variant="md-24" className={styles.title}>
-        ZX7 SPEAKER
+        {name}
       </Title>
-      <Button variant="filled" className={styles.cardBtn}>
+      <Button
+        href={`/product-detail/${slug}`}
+        variant="filled"
+        className={styles.cardBtn}
+      >
         See product
       </Button>
     </div>
