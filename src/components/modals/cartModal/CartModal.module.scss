@@ -1,0 +1,48 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
+.cartModal {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .cartBtn {
+    max-width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clearCartBtn {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.productsList {
+  height: 240px;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.total {
+  color: $black-2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &Text {
+    text-transform: uppercase;
+  }
+
+  &Price {
+    @include text-preset-6;
+  }
+}
