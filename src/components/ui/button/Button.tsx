@@ -9,6 +9,7 @@ type ButtonProps = {
   variant: 'filled' | 'outline' | 'text';
   className?: string;
   type?: 'link' | 'button';
+  onClick?: React.MouseEventHandler<HTMLButtonElement|HTMLAnchorElement>
 };
 
 export default function Button({

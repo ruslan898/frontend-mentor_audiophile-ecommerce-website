@@ -1,9 +1,12 @@
+import { useModalContext } from '../../../context/modal/ModalContext';
 import Button from '../../ui/button/Button';
 import CartItem from '../../ui/cartItem/CartItem';
 import Title from '../../ui/title/Title';
 import styles from './CartModal.module.scss';
 
 export default function CartModal() {
+  const {toggleOpen} = useModalContext()
+
   return (
     <div className={styles.cartModal}>
       <div className={styles.header}>
@@ -31,7 +34,12 @@ export default function CartModal() {
           <span className={styles.totalPrice}>$ 5,396</span>
         </div>
       </div>
-      <Button href="/checkout" variant="filled" className={styles.cartBtn}>
+      <Button
+        href="/checkout"
+        variant="filled"
+        className={styles.cartBtn}
+        onClick={toggleOpen}
+      >
         Checkout
       </Button>
     </div>
