@@ -19,13 +19,13 @@ export default function CartModal() {
       </div>
       <ul className={styles.productsList}>
         <li>
-          <CartItem />
+          <CartItem variant='cart' />
         </li>
         <li>
-          <CartItem />
+          <CartItem variant='cart' />
         </li>
         <li>
-          <CartItem />
+          <CartItem variant='cart' />
         </li>
       </ul>
       <div className={styles.summary}>
