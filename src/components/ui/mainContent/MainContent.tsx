@@ -17,6 +17,7 @@ export default function MainContent({ children }: MainContentProps) {
   const classes = clsx(
     styles.mainContent,
     (path === '/' || path.includes('category')) && styles.mainContentHome,
+    path === '/checkout' && styles.mainContentCheckout
   );
 
   return (

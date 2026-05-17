@@ -1,3 +1,6 @@
+@use '/src/styles/variables.scss' as *;
+@use '/src/styles/mixins.scss' as *;
+
 .mainContent {
   position: relative;
   display: flex;
@@ -7,5 +10,10 @@
 
   &Home {
     padding-top: 0;
+  }
+
+  &Checkout {
+    background-color: $gray;
+    padding-top: 48px;
   }
 }
