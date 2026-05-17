@@ -63,8 +63,13 @@ a {
   display: flex;
   flex-direction: column;
   gap: 56px;
+
+  &.checkout {
+    gap: 38px;
+  }
 }
 
 .backBtn {
+  padding: 5px 0;
   background-color: transparent;
 }
