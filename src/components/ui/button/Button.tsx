@@ -3,39 +3,36 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './Button.module.scss';
 
-type ButtonProps = {
-  href?: string;
-  children: React.ReactNode;
-  variant: 'filled' | 'outline' | 'text';
-  className?: string;
-  type?: 'link' | 'button';
-  onClick?: React.MouseEventHandler<HTMLButtonElement|HTMLAnchorElement>
-};
+type ButtonProps =
+  | {
+      type: 'button';
+      children: React.ReactNode;
+      variant: 'filled' | 'outline' | 'text';
+      className?: string;
+      onClick: React.MouseEventHandler<HTMLButtonElement>;
+    }
+    | {
+      type: 'link';
+      href: string;
+      children: React.ReactNode;
+      variant: 'filled' | 'outline' | 'text';
+      className?: string;
+    };
 
-export default function Button({
-  href,
-  children,
-  variant,
-  className,
-  type,
-  ...props
-}: ButtonProps) {
+export default function Button(props: ButtonProps) {
+  const { type, children, variant, className } = props;
   const classes = clsx(styles.btn, styles[`btn-${variant}`], className);
 
   if (type === 'button') {
     return (
-      <button type="button" className={classes} {...props}>
+      <button type="button" className={classes} onClick={props.onClick}>
         {children}
       </button>
     );
   }
 
-  if (!href) {
-    throw new Error('Please add a "href" property to the Link component')
-  }
-
   return (
-    <Link to={href} className={classes} {...props}>
+    <Link to={props.href} className={classes}>
       {children}
     </Link>
   );
