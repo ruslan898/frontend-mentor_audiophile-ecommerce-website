@@ -3,8 +3,17 @@ import Input from '../ui/input/Input';
 import styles from './Form.module.scss';
 import CartItem from '../ui/cartItem/CartItem';
 import Button from '../ui/button/Button';
+import { useCartContext } from '../../context/cart/CartContext';
 
 export default function Form() {
+  const { cart, cartItemsTotal } = useCartContext();
+
+  const VAT = 0.2
+  const SHIPPING_PRICE = 50
+
+  const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US')
+  const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US')
+
   return (
     <form className={styles.form}>
       <div className="container">
@@ -95,32 +104,34 @@ export default function Form() {
           <div className={styles.orderSummary}>
             <h2 className={styles.summaryTitle}>Summary</h2>
             <ul className={styles.orderItems}>
-              <li>
-                <CartItem variant="checkout" />
-              </li>
-              <li>
-                <CartItem variant="checkout" />
-              </li>
-              <li>
-                <CartItem variant="checkout" />
-              </li>
+              {cart.items.map((cartItem) => {
+                return (
+                  <li key={cartItem.id}>
+                    <CartItem variant="checkout" {...cartItem} />
+                  </li>
+                );
+              })}
             </ul>
             <ul className={styles.orderInfo}>
               <li>
                 <span className={styles.orderInfoText}>Total</span>
-                <span className={styles.orderInfoValue}>$ 5,396</span>
+                <span className={styles.orderInfoValue}>
+                  $ {cartItemsTotal.toLocaleString('en-US')}
+                </span>
               </li>
               <li>
                 <span className={styles.orderInfoText}>Shipping</span>
-                <span className={styles.orderInfoValue}>$ 50</span>
+                <span className={styles.orderInfoValue}>
+                  $ {SHIPPING_PRICE}
+                </span>
               </li>
               <li>
                 <span className={styles.orderInfoText}>VAT (included)</span>
-                <span className={styles.orderInfoValue}>$ 1,079</span>
+                <span className={styles.orderInfoValue}>$ {vatValue}</span>
               </li>
               <li>
                 <span className={styles.orderInfoText}>Grand total</span>
-                <span className={styles.orderInfoValue}>$ 5,446</span>
+                <span className={styles.orderInfoValue}>$ {grandTotal}</span>
               </li>
             </ul>
             <Button
