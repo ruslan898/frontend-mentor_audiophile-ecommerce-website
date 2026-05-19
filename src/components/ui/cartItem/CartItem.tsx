@@ -3,7 +3,7 @@ import styles from './CartItem.module.scss';
 import type { Action } from '../../../context/cart/CartProvider';
 import { getShortItemName } from '../../../utils/utils';
 
-type CartItemProps = {
+type BaseCartItemProps = {
   variant: 'cart' | 'checkout';
   id: number;
   image: string;
@@ -13,9 +13,17 @@ type CartItemProps = {
   onClick: React.Dispatch<Action>;
 };
 
-export default function CartItem({ variant, id, image, name, price, quantity, onClick }: CartItemProps) {
-  const shortItemName = getShortItemName(name)
+type CartItemProps =
+  | ({
+      variant: 'cart';
+    } & BaseCartItemProps)
+  | ({
+      variant: 'checkout';
+    } & Omit<BaseCartItemProps, 'onClick'>);
 
+export default function CartItem(props: CartItemProps) {
+  const { variant, id, image, name, price, quantity } = props;
+  const shortItemName = getShortItemName(name);
 
   return (
     <div className={styles.cartItem}>
@@ -35,10 +43,10 @@ export default function CartItem({ variant, id, image, name, price, quantity, on
           variant="cartModal"
           id={id}
           count={quantity}
-          onCountChange={onClick}
+          onCountChange={props.onClick}
         />
       ) : (
-        <span>x1</span>
+        <span>x{quantity}</span>
       )}
     </div>
   );
