@@ -4,6 +4,8 @@ import CartAmount from '../../ui/cartAmount/CartAmount';
 import styles from './ProductDetailBlock.module.scss';
 import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
 import type { Product } from '../../../types/types';
+import { useCartContext } from '../../../context/cart/CartContext';
+import { useState } from 'react';
 
 type ProductDetailBlockProps = {
   productData: Product;
@@ -20,9 +22,24 @@ export default function ProductDetailBlock({
     price,
     features,
     includes,
+    id,
   } = productData;
 
   const productImage = useImageByScreenSize(image);
+
+  const { cart, dispatch } = useCartContext();
+
+  const [count, setCount] = useState(1);
+
+  const itemInCart = cart.items.find((cartItem) => cartItem.id === id);
+
+  const cartItem = {
+    id,
+    name,
+    price,
+    quantity: itemInCart?.quantity ?? count,
+    image: image.mobile,
+  };
 
   return (
     <section className={styles.productDetailBlock}>
@@ -51,8 +68,26 @@ export default function ProductDetailBlock({
               </div>
 
               <div className={styles.actions}>
-                <CartAmount variant='regular' />
-                <Button type="button" variant="filled">
+                <CartAmount
+                  variant="regular"
+                  count={count}
+                  onCountChange={setCount}
+                />
+
+                <Button
+                  type="button"
+                  variant="filled"
+                  onClick={() => {
+                    setCount(1);
+                    dispatch({
+                      type: 'add-item',
+                      payload: {
+                        item: cartItem,
+                        quantity: count,
+                      },
+                    });
+                  }}
+                >
                   Add to cart
                 </Button>
               </div>
