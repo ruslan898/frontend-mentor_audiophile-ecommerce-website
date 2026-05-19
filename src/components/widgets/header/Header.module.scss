@@ -35,7 +35,23 @@
 }
 
 .cartBtn {
+  position: relative;
   padding: 6px 0;
+}
+
+.cartItemsCount {
+  position: absolute;
+  top: 0;
+  right: -50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  border-radius: 50%;
+  color: $white;
+  background-color: $orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .divider {

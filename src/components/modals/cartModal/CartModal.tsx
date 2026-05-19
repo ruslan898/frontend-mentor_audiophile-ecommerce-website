@@ -11,22 +11,24 @@ export default function CartModal() {
   const { cart, cartItemsCount, cartItemsTotal, dispatch } = useCartContext();
   const navigate = useNavigate();
 
+  const cartEmpty = cart.items.length === 0;
+
   return (
     <div className={styles.cartModal}>
       <div className={styles.header}>
         <Title level={4} variant="sm" className={styles.title}>
           Cart ({cartItemsCount})
         </Title>
-        <button
+        {!cartEmpty && <button
           type="button"
           className={styles.clearCartBtn}
           onClick={() => dispatch({ type: 'clear-cart' })}
         >
           Remove all
-        </button>
+        </button>}
       </div>
       <ul className={styles.productsList}>
-        {cart.items.length > 0 ? (
+        {!cartEmpty ? (
           cart.items.map((cartItem) => {
             const { id, ...props } = cartItem;
             return (
@@ -58,10 +60,10 @@ export default function CartModal() {
         className={styles.cartBtn}
         onClick={() => {
           toggleOpen();
-          navigate('/checkout');
+          navigate(cartEmpty ? '/' : '/checkout');
         }}
       >
-        Checkout
+        {cartEmpty ? 'Go to homepage' : 'Checkout'}
       </Button>
     </div>
   );

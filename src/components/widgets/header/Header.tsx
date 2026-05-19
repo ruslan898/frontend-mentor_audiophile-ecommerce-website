@@ -5,12 +5,14 @@ import logoIcon from '/assets/shared/desktop/logo.svg';
 import cartIcon from '/assets/shared/desktop/icon-cart.svg';
 import Navbar from '../../ui/navbar/Navbar';
 import { useModalContext } from '../../../context/modal/ModalContext';
+import { useCartContext } from '../../../context/cart/CartContext';
 
 export default function Header() {
   const windowWidth = useWindowWidth();
   const path = useLocation().pathname;
 
   const { toggleOpen } = useModalContext();
+  const { cartItemsCount } = useCartContext();
 
   return (
     <header className={styles.header}>
@@ -41,6 +43,9 @@ export default function Header() {
             onClick={toggleOpen}
           >
             <img src={cartIcon} alt="Cart" className={styles.cartImg} />
+            {cartItemsCount > 0 && (
+              <div className={styles.cartItemsCount}>{cartItemsCount}</div>
+            )}
           </button>
           {path === '/' ||
             (path.includes('category') && (
