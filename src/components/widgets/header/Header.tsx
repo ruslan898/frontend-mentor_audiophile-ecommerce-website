@@ -6,6 +6,8 @@ import cartIcon from '/assets/shared/desktop/icon-cart.svg';
 import Navbar from '../../ui/navbar/Navbar';
 import { useModalContext } from '../../../context/modal/ModalContext';
 import { useCartContext } from '../../../context/cart/CartContext';
+import BurgerMenu from '../burgerMenu/BurgerMenu';
+import { useToggle } from '../../../hooks/useToggle';
 
 export default function Header() {
   const windowWidth = useWindowWidth();
@@ -13,6 +15,8 @@ export default function Header() {
 
   const { toggleOpen } = useModalContext();
   const { cartItemsCount } = useCartContext();
+
+  const {isOpen: burgerOpen, toggleOpen: toggleBurger} = useToggle()
 
   return (
     <header className={styles.header}>
@@ -23,6 +27,7 @@ export default function Header() {
               type="button"
               className={styles.burgerMenuBtn}
               aria-label="Open burger menu"
+              onClick={toggleBurger}
             >
               <span></span>
               <span></span>
@@ -34,7 +39,7 @@ export default function Header() {
             <img src={logoIcon} alt="Logo" className={styles.logoImg} />
           </Link>
 
-          {windowWidth >= 1024 && <Navbar />}
+          {windowWidth >= 1024 && <Navbar variant='header' />}
 
           <button
             type="button"
@@ -53,6 +58,7 @@ export default function Header() {
             ))}
         </div>
       </div>
+      <BurgerMenu isOpen={burgerOpen} onToggle={toggleBurger} />
     </header>
   );
 }
