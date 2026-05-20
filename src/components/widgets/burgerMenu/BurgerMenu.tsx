@@ -13,7 +13,9 @@ export default function BurgerMenu({ isOpen, onToggle }: BurgerMenuProps) {
   const menuClasses = clsx(styles.burgerMenu, isOpen && styles.menuOpen);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
 
     return () => {
       document.body.style.overflow = '';
@@ -24,7 +26,11 @@ export default function BurgerMenu({ isOpen, onToggle }: BurgerMenuProps) {
     <>
       {isOpen && <div className={styles.overlay} onClick={onToggle}></div>}
       <div className={menuClasses}>
-        <Navbar variant='burgerMenu' className={styles.burgerMenuNavbar} onClick={onToggle} />
+        <Navbar
+          variant="burgerMenu"
+          className={styles.burgerMenuNavbar}
+          onClick={onToggle}
+        />
       </div>
     </>,
     document.body,
