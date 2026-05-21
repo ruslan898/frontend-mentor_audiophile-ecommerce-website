@@ -50,7 +50,7 @@ export default function HeroSection() {
               made for the passionate music enthusiast.
             </p>
           </div>
-          <Button href={`product-detail/${slug}`} variant="filled">
+          <Button type='link' href={`product-detail/${slug}`} variant="filled">
             See product
           </Button>
         </div>

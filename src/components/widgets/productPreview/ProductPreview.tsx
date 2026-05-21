@@ -32,7 +32,11 @@ export default function ProductPreview({
               {name}
             </Title>
             <p className={styles.text}>{description}</p>
-            <Button href={`/product-detail/${slug}`} variant="filled">
+            <Button
+              type="link"
+              href={`/product-detail/${slug}`}
+              variant="filled"
+            >
               See product
             </Button>
           </div>

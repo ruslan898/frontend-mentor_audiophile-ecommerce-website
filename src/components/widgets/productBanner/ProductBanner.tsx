@@ -55,6 +55,7 @@ export default function ProductBanner({
             truly remarkable sound.
           </p>
           <Button
+            type='link'
             href={`product-detail/${slug}`}
             variant="filled"
             className={styles.bannerBtn}
@@ -72,7 +73,7 @@ export default function ProductBanner({
         <Title level={3} variant="md-28">
           {title}
         </Title>
-        <Button href={`product-detail/${slug}`} variant="outline">
+        <Button type='link' href={`product-detail/${slug}`} variant="outline">
           See product
         </Button>
       </div>
@@ -87,7 +88,7 @@ export default function ProductBanner({
           <Title level={3} variant="md-28">
             {title}
           </Title>
-          <Button href={`product-detail/${slug}`} variant="outline">
+          <Button type='link' href={`product-detail/${slug}`} variant="outline">
             See product
           </Button>
         </div>

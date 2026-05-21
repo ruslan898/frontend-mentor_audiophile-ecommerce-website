@@ -3,37 +3,42 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './Button.module.scss';
 
+type BaseButtonProps = {
+  children: React.ReactNode;
+  variant: 'filled' | 'outline' | 'text';
+  className?: string;
+};
+
 type ButtonProps =
-  | {
-      type: 'button';
-      children: React.ReactNode;
-      variant: 'filled' | 'outline' | 'text';
-      className?: string;
-      onClick: React.MouseEventHandler<HTMLButtonElement>;
-    }
-    | {
+  | ({
+      type: 'button' | 'submit';
+    } & BaseButtonProps &
+      React.ButtonHTMLAttributes<HTMLButtonElement>)
+  | ({
       type: 'link';
       href: string;
-      children: React.ReactNode;
-      variant: 'filled' | 'outline' | 'text';
-      className?: string;
-    };
+    } & BaseButtonProps);
 
-export default function Button(props: ButtonProps) {
-  const { type, children, variant, className } = props;
+export default function Button({
+  type,
+  children,
+  variant,
+  className,
+  ...props
+}: ButtonProps) {
   const classes = clsx(styles.btn, styles[`btn-${variant}`], className);
 
-  if (type === 'button') {
+  if (type === 'link') {
     return (
-      <button type="button" className={classes} onClick={props.onClick}>
+      <Link to={(props as { href: string }).href} className={classes}>
         {children}
-      </button>
+      </Link>
     );
   }
 
   return (
-    <Link to={props.href} className={classes}>
+    <button type={type} className={classes} {...props}>
       {children}
-    </Link>
+    </button>
   );
 }

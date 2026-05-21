@@ -26,7 +26,7 @@ export default function CategoryCard({
         <Title level={2} variant="sm">
           {title}
         </Title>
-        <Button href={href} variant="text">
+        <Button type='link' href={href} variant="text">
           Shop
           <img src={iconArrowRight} alt="Arrow right" />
         </Button>

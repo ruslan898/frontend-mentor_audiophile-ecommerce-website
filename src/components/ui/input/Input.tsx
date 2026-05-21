@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import React, { useId } from 'react';
 import styles from './Input.module.scss';
 
 type InputProps =
@@ -8,25 +8,36 @@ type InputProps =
       placeholder: string;
       label: string;
     }
-  | {
+  | ({
       type: 'radio';
       name: string;
       label: string;
-    };
+      value: string;
+    } & React.InputHTMLAttributes<HTMLInputElement>);
 
-export default function Input(props: InputProps) {
+export default function Input({
+  label,
+  type,
+  name,
+  placeholder,
+  ...props
+}: InputProps) {
   const id = useId();
 
-  if (props.type === 'radio') {
+  if (type === 'radio') {
     return (
       <label htmlFor={id} className={styles.inputRadio}>
-        <input type="radio" name={props.name} id={id} />
-        {props.label}
+        <input
+          type="radio"
+          name={name}
+          id={id}
+          value={(props as { value: string }).value}
+          {...props}
+        />
+        {label}
       </label>
     );
   }
-
-  const { label, type, name, placeholder } = props;
 
   return (
     <div className={styles.inputField}>
