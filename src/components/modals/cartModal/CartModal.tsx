@@ -7,7 +7,7 @@ import Title from '../../ui/title/Title';
 import styles from './CartModal.module.scss';
 
 export default function CartModal() {
-  const { toggleOpen } = useModalContext();
+  const { closeModal } = useModalContext();
   const { cart, cartItemsCount, cartItemsTotal, dispatch } = useCartContext();
   const navigate = useNavigate();
 
@@ -19,13 +19,15 @@ export default function CartModal() {
         <Title level={4} variant="sm" className={styles.title}>
           Cart ({cartItemsCount})
         </Title>
-        {!cartEmpty && <button
-          type="button"
-          className={styles.clearCartBtn}
-          onClick={() => dispatch({ type: 'clear-cart' })}
-        >
-          Remove all
-        </button>}
+        {!cartEmpty && (
+          <button
+            type="button"
+            className={styles.clearCartBtn}
+            onClick={() => dispatch({ type: 'clear-cart' })}
+          >
+            Remove all
+          </button>
+        )}
       </div>
       <ul className={styles.productsList}>
         {!cartEmpty ? (
@@ -59,7 +61,7 @@ export default function CartModal() {
         variant="filled"
         className={styles.cartBtn}
         onClick={() => {
-          toggleOpen();
+          closeModal();
           navigate(cartEmpty ? '/' : '/checkout');
         }}
       >

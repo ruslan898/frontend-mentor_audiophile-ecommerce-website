@@ -12,7 +12,7 @@ type MainContentProps = {
 };
 
 export default function MainContent({ children }: MainContentProps) {
-  const { isOpen, toggleOpen } = useModalContext();
+  const { isOpen, closeModal, variant } = useModalContext();
   const path = useLocation().pathname;
   const classes = clsx(
     styles.mainContent,
@@ -20,13 +20,11 @@ export default function MainContent({ children }: MainContentProps) {
     path === '/checkout' && styles.mainContentCheckout,
   );
 
-  const modalVariant = path === '/checkout' ? 'center' : 'dropdown';
-
   return (
     <main className={classes}>
       {children}
-      <Modal isOpen={isOpen} onToggle={toggleOpen} variant={modalVariant}>
-        {modalVariant === 'dropdown' ? <CartModal /> : <CheckoutSuccessModal />}
+      <Modal isOpen={isOpen} closeModal={closeModal} variant={variant}>
+        {variant === 'dropdown' ? <CartModal /> : <CheckoutSuccessModal />}
       </Modal>
     </main>
   );

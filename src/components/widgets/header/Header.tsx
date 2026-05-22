@@ -13,7 +13,7 @@ export default function Header() {
   const windowWidth = useWindowWidth();
   const path = useLocation().pathname;
 
-  const { toggleOpen } = useModalContext();
+  const { openModal } = useModalContext();
   const { cartItemsCount } = useCartContext();
 
   const {isOpen: burgerOpen, toggleOpen: toggleBurger} = useToggle()
@@ -39,13 +39,13 @@ export default function Header() {
             <img src={logoIcon} alt="Logo" className={styles.logoImg} />
           </Link>
 
-          {windowWidth >= 1024 && <Navbar variant='header' />}
+          {windowWidth >= 1024 && <Navbar variant="header" />}
 
           <button
             type="button"
             className={styles.cartBtn}
             aria-label="Open cart"
-            onClick={toggleOpen}
+            onClick={() => openModal('dropdown')}
           >
             <img src={cartIcon} alt="Cart" className={styles.cartImg} />
             {cartItemsCount > 0 && (
