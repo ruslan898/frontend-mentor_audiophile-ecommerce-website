@@ -29,7 +29,7 @@ export default function Footer() {
                 </p>
               </div>
               <div className={styles.footerBottom}>
-                <Navbar className={styles.footerNavbar} />
+                <Navbar variant='header' className={styles.footerNavbar} />
                 <SocialLinks />
               </div>
             </div>
@@ -51,7 +51,7 @@ export default function Footer() {
             <Link to="/" aria-label="Go to the homepage">
               <img src={logoIcon} alt="Logo" className={styles.logoImg} />
             </Link>
-            <Navbar className={styles.footerNavbar} />
+            <Navbar variant='header' className={styles.footerNavbar} />
             <p className={styles.footerText}>
               Audiophile is an all in one stop to fulfill your audio needs.
               We're a small team of music lovers and sound specialists who are
