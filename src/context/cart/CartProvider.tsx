@@ -22,6 +22,9 @@ export type CartContextValue = {
   dispatch: React.Dispatch<Action>;
   cartItemsCount: number;
   cartItemsTotal: number;
+  SHIPPING_PRICE: number;
+  vatValue: string;
+  grandTotal: string;
 };
 
 export type Cart = {
@@ -93,9 +96,22 @@ export default function CartProvider({ children }: CartProviderProps) {
     return total + item.price * item.quantity;
   }, 0);
 
+  const VAT = 0.2;
+  const SHIPPING_PRICE = cartItemsCount > 0 ? 50 : 0;
+  const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US');
+  const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US');
+
   return (
     <CartContext.Provider
-      value={{ cart, dispatch, cartItemsCount, cartItemsTotal }}
+      value={{
+        cart,
+        dispatch,
+        cartItemsCount,
+        cartItemsTotal,
+        SHIPPING_PRICE,
+        vatValue,
+        grandTotal,
+      }}
     >
       {children}
     </CartContext.Provider>

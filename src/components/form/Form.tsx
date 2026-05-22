@@ -11,16 +11,11 @@ import { useCartContext } from '../../context/cart/CartContext';
 import cashPaymentIcon from '/assets/checkout/icon-cash-on-delivery.svg';
 
 export default function CheckoutForm() {
-  const { toggleOpen } = useModalContext();
-  const { cart, cartItemsTotal } = useCartContext();
+  const { openModal } = useModalContext();
+  const { cart, cartItemsTotal, SHIPPING_PRICE, vatValue, grandTotal } =
+    useCartContext();
 
   const cartEmpty = cart.items.length === 0;
-
-  const VAT = 0.2;
-  const SHIPPING_PRICE = !cartEmpty ? 50 : 0;
-
-  const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US');
-  const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US');
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -85,7 +80,7 @@ export default function CheckoutForm() {
       }}
       validationSchema={ValidationSchema}
       onSubmit={() => {
-        toggleOpen();
+        openModal('center');
         formRef.current?.reset();
       }}
     >
