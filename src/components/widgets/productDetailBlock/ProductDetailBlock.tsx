@@ -108,7 +108,7 @@ export default function ProductDetailBlock({
               <ul className={styles.itemsList}>
                 {includes.map((obj) => {
                   return (
-                    <li className={styles.item}>
+                    <li className={styles.item} key={obj.item}>
                       <span className={styles.quantity}>{obj.quantity}x</span>
                       <span className={styles.itemName}>{obj.item}</span>
                     </li>
