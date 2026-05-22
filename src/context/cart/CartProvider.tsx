@@ -1,5 +1,9 @@
 import { useReducer, type ReactNode } from 'react';
 import { CartContext } from './CartContext';
+import {
+  getDataFromLocalStorage,
+  saveDataToLocalStorage,
+} from '../../utils/utils';
 
 type CartProviderProps = {
   children: ReactNode;
@@ -46,6 +50,7 @@ function reducer(state: Cart, action: Action): Cart {
             }
           })
         : [...state.items, item];
+      saveDataToLocalStorage('cart', updatedItems);
       return { items: updatedItems };
     }
 
@@ -63,11 +68,13 @@ function reducer(state: Cart, action: Action): Cart {
           }
         })
         .filter((cartItem) => cartItem.quantity > 0);
+      saveDataToLocalStorage('cart', updatedItems);
 
       return { items: updatedItems };
     }
 
     case 'clear-cart': {
+      localStorage.removeItem('cart');
       return { items: [] };
     }
     default:
@@ -77,10 +84,8 @@ function reducer(state: Cart, action: Action): Cart {
 
 export default function CartProvider({ children }: CartProviderProps) {
   const [cart, dispatch] = useReducer(reducer, {
-    items: [],
+    items: getDataFromLocalStorage('cart') ?? [],
   });
-
-  console.log(cart);
 
   const cartItemsCount = cart.items.length;
 

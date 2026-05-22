@@ -7,3 +7,13 @@ export function getShortItemName(fullName: string): string {
     return nameArr[0];
   }
 }
+
+export function getDataFromLocalStorage(key: string) {
+  const localStorageItem = localStorage.getItem(key);
+  return localStorageItem ? JSON.parse(localStorageItem) : null;
+}
+
+export function saveDataToLocalStorage<T>(key: string, payload: T) {
+  const stringifiedPayload = JSON.stringify(payload);
+  return localStorage.setItem(key, stringifiedPayload);
+}
