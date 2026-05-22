@@ -1,7 +1,7 @@
 .overlay {
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -12,25 +12,29 @@
   width: 100%;
   background-color: white;
   border-radius: 8px;
+  overflow: visible;
 
   &.dropdown {
     max-width: 377px;
     min-height: 284px;
     max-height: 488px;
-    margin-top: 24px;
+    margin-top: 122px;
     padding: 32px 28px;
   }
 
   &.center {
     position: fixed;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 540px;
     width: 90%;
-    min-height: 581px;
-    margin: 132px auto 0;
+    min-height: 320px;
+    max-height: calc(100vh - 64px);
+    margin: 0 auto;
     padding: 32px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &Wrapper {
@@ -38,10 +42,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: start;
-
-    &Home {
-      padding-top: 90px;
-    }
   }
 }
 
@@ -53,18 +53,6 @@
 
     &.center {
       padding: 48px;
-    }
-  }
-}
-
-@media (min-width: 1024px) {
-  .modal {
-    &.dropdown {
-      margin-top: 32px;
-    }
-
-    &.center {
-      margin-top: 125px;
     }
   }
 }

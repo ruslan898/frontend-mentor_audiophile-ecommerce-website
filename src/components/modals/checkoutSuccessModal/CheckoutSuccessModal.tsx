@@ -1,16 +1,26 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Button from '../../ui/button/Button';
 import Title from '../../ui/title/Title';
 import styles from './CheckoutSuccessModal.module.scss';
 import iconOrderConfirmation from '/assets/checkout/icon-order-confirmation.svg';
-import productImg from '/assets/cart/image-xx99-mark-two-headphones.jpg';
 import { useModalContext } from '../../../context/modal/ModalContext';
 import { useCartContext } from '../../../context/cart/CartContext';
+import { getShortItemName } from '../../../utils/utils';
 
 export default function CheckoutSuccessModal() {
-  const { toggleOpen } = useModalContext();
+  const { openModal } = useModalContext();
   const navigate = useNavigate();
-  const { dispatch } = useCartContext();
+  const { cart, cartItemsCount, grandTotal, dispatch } = useCartContext();
+
+  const [orderList, setOrderList] = useState<'short' | 'expanded'>('short');
+
+  const itemsList =
+    orderList === 'short' ? cart.items.slice(0, 1) : cart.items.slice(0);
+
+  function toggleOrderList() {
+    setOrderList((prevVal) => (prevVal === 'short' ? 'expanded' : 'short'));
+  }
 
   return (
     <div className={styles.checkoutSuccessModal}>
@@ -27,24 +37,38 @@ export default function CheckoutSuccessModal() {
       </p>
       <div className={styles.orderDetails}>
         <div className={styles.orderedProducts}>
-          <div className={styles.product}>
-            <img
-              src={productImg}
-              alt="An image of an ordered product"
-              className={styles.productImg}
-            />
-            <div className={styles.productInfo}>
-              <h3 className={styles.productName}>XX99 MK II</h3>
-              <p className={styles.productPrice}>$ 2,999</p>
-            </div>
-            <span className={styles.productAmount}>x1</span>
-          </div>
+          {itemsList.map((cartItem) => {
+            const { id, image, name, price, quantity } = cartItem;
+
+            return (
+              <div className={styles.product} key={id}>
+                <img
+                  src={image}
+                  alt={`An image of ${name}`}
+                  className={styles.productImg}
+                />
+                <div className={styles.productInfo}>
+                  <h3 className={styles.productName}>
+                    {getShortItemName(name)}
+                  </h3>
+                  <p className={styles.productPrice}>
+                    $ {price.toLocaleString('en-US')}
+                  </p>
+                </div>
+                <span className={styles.productAmount}>x{quantity}</span>
+              </div>
+            );
+          })}
           <hr className={styles.divider} />
-          <p className={styles.otherProducts}>and 2 other item(s)</p>
+          <button className={styles.otherProducts} onClick={toggleOrderList}>
+            {orderList === 'short'
+              ? `and ${cartItemsCount - 1} other item(s)`
+              : 'Show less'}
+          </button>
         </div>
         <div className={styles.orderPrice}>
           <h3 className={styles.totalPriceText}>Grand total</h3>
-          <p className={styles.totalPriceValue}>$ 5,446</p>
+          <p className={styles.totalPriceValue}>$ {grandTotal}</p>
         </div>
       </div>
       <Button
@@ -52,7 +76,7 @@ export default function CheckoutSuccessModal() {
         variant="filled"
         className={styles.modalBtn}
         onClick={() => {
-          toggleOpen();
+          openModal('center');
           navigate('/');
           dispatch({ type: 'clear-cart' });
         }}

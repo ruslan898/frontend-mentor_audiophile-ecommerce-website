@@ -46,7 +46,7 @@
   }
 
   .productTitle {
-    max-width: 10ch;
+    max-width: 15ch;
   }
 
   .productDescription {
@@ -124,10 +124,6 @@
     .subtitle {
       color: $orange;
       @include text-preset-7;
-    }
-
-    .productTitle {
-      max-width: 12ch;
     }
 
     .price {
