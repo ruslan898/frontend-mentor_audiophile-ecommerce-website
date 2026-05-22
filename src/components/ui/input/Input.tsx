@@ -1,4 +1,5 @@
 import React, { useId } from 'react';
+import { useField } from 'formik';
 import styles from './Input.module.scss';
 
 type InputProps =
@@ -24,15 +25,20 @@ export default function Input({
 }: InputProps) {
   const id = useId();
 
+  const [field, meta] = useField({ name, type, ...props });
+
   if (type === 'radio') {
+    const radioValue = (props as { value: string }).value;
+
     return (
       <label htmlFor={id} className={styles.inputRadio}>
         <input
+          {...props}
+          {...field}
           type="radio"
           name={name}
           id={id}
-          value={(props as { value: string }).value}
-          {...props}
+          value={radioValue}
         />
         {label}
       </label>
@@ -40,17 +46,24 @@ export default function Input({
   }
 
   return (
-    <div className={styles.inputField}>
-      <label htmlFor={id} className={styles.label}>
-        {label}
-      </label>
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        id={id}
-        className={styles.input}
-      />
-    </div>
+    <>
+      <div className={styles.inputField}>
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
+        <input
+          {...props}
+          {...field}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          id={id}
+          className={styles.input}
+        />
+        {meta.touched && meta.error && (
+          <div className={styles.error}>{meta.error}</div>
+        )}
+      </div>
+    </>
   );
 }

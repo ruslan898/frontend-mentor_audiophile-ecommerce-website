@@ -1,149 +1,248 @@
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import FormSection from './formSection/FormSection';
 import Input from '../ui/input/Input';
 import styles from './Form.module.scss';
 import CartItem from '../ui/cartItem/CartItem';
 import Button from '../ui/button/Button';
 import { useCartContext } from '../../context/cart/CartContext';
+import cashPaymentIcon from '/assets/checkout/icon-cash-on-delivery.svg';
 
-export default function Form() {
+export default function CheckoutForm() {
   const { cart, cartItemsTotal } = useCartContext();
 
-  const VAT = 0.2
-  const SHIPPING_PRICE = 50
+  const cartEmpty = cart.items.length === 0;
 
-  const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US')
-  const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US')
+  const VAT = 0.2;
+  const SHIPPING_PRICE = !cartEmpty ? 50 : 0;
+
+  const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US');
+  const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US');
+
+  const ValidationSchema = Yup.object({
+    name: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    email: Yup.string().required('Required').email('Invalid email'),
+    tel: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    address: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    zipCode: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    city: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    country: Yup.string()
+      .required('Required')
+      .min(2, 'At least 2 characters')
+      .max(50, 'Maximum 50 characters'),
+    paymentMethod: Yup.string().required(),
+    eMoneyNum: Yup.string().when('paymentMethod', {
+      is: 'e-money',
+      then: (schema) =>
+        schema
+          .required('Required')
+          .min(2, 'At least 2 characters')
+          .max(50, 'Maximum 50 characters'),
+    }),
+    eMoneyPin: Yup.string().when('paymentMethod', {
+      is: 'e-money',
+      then: (schema) =>
+        schema
+          .required('Required')
+          .min(2, 'At least 2 characters')
+          .max(50, 'Maximum 50 characters'),
+    }),
+  });
 
   return (
-    <form className={styles.form}>
-      <div className="container">
-        <div className={styles.formWrapper}>
-          <div className={styles.formInner}>
-            <h1 className={styles.pageTitle}>Checkout</h1>
-            <div className={styles.formContent}>
-              <FormSection title="Billing details">
-                <div className={styles.inputGrid}>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Alexei Ward"
-                    label="Name"
-                  />
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="alexei@mail.com"
-                    label="Email Address"
-                  />
-                  <Input
-                    type="tel"
-                    name="phone-number"
-                    placeholder="+1 202-555-0136"
-                    label="Phone Number"
-                  />
+    <Formik
+      initialValues={{
+        name: '',
+        email: '',
+        tel: '',
+        address: '',
+        zipCode: '',
+        city: '',
+        country: '',
+        paymentMethod: 'e-money',
+        eMoneyNum: '',
+        eMoneyPin: '',
+      }}
+      validationSchema={ValidationSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ isSubmitting, values }) => (
+        <Form className={styles.form}>
+          <div className="container">
+            <div className={styles.formWrapper}>
+              <div className={styles.formInner}>
+                <h1 className={styles.pageTitle}>Checkout</h1>
+                <div className={styles.formContent}>
+                  <FormSection title="Billing details">
+                    <div className={styles.inputGrid}>
+                      <Input
+                        type="text"
+                        name="name"
+                        placeholder="Alexei Ward"
+                        label="Name"
+                      />
+                      <Input
+                        type="email"
+                        name="email"
+                        placeholder="alexei@mail.com"
+                        label="Email Address"
+                      />
+                      <Input
+                        type="tel"
+                        name="tel"
+                        placeholder="+1 202-555-0136"
+                        label="Phone Number"
+                      />
+                    </div>
+                  </FormSection>
+                  <FormSection title="Shipping info">
+                    <div className={styles.inputGrid}>
+                      <div className={styles.inputBig}>
+                        <Input
+                          type="text"
+                          name="address"
+                          placeholder="1137 Williams Avenue"
+                          label="Your Address"
+                        />
+                      </div>
+                      <Input
+                        type="text"
+                        name="zipCode"
+                        placeholder="10001"
+                        label="ZIP Code"
+                      />
+                      <Input
+                        type="text"
+                        name="city"
+                        placeholder="New York"
+                        label="City"
+                      />
+                      <Input
+                        type="text"
+                        name="country"
+                        placeholder="United States"
+                        label="Country"
+                      />
+                    </div>
+                  </FormSection>
+                  <FormSection title="Payment details">
+                    <div className={styles.inputGrid}>
+                      <h2 className={styles.radioTitle}>Payment Method</h2>
+                      <Input
+                        type="radio"
+                        name="paymentMethod"
+                        label="e-Money"
+                        value="e-money"
+                      />
+                      <Input
+                        type="radio"
+                        name="paymentMethod"
+                        label="Cash on Delivery"
+                        value="cash"
+                      />
+                    </div>
+                  </FormSection>
+                  {values.paymentMethod === 'e-money' ? (
+                    <div className={styles.inputGrid}>
+                      <Input
+                        type="text"
+                        name="eMoneyNum"
+                        placeholder="238521993"
+                        label="e-Money Number"
+                      />
+                      <Input
+                        type="text"
+                        name="eMoneyPin"
+                        placeholder="6891"
+                        label="e-Money PIN"
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.cashPaymentDescr}>
+                      <img
+                        src={cashPaymentIcon}
+                        alt="Cash on delivery icon"
+                        className={styles.cashPaymentIcon}
+                      />
+                      <p className={styles.cashPaymentText}>
+                        The ‘Cash on Delivery’ option enables you to pay in cash
+                        when our delivery courier arrives at your residence.
+                        Just make sure your address is correct so that your
+                        order will not be cancelled.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </FormSection>
-              <FormSection title="Shipping info">
-                <div className={styles.inputGrid}>
-                  <div className={styles.inputBig}>
-                    <Input
-                      type="text"
-                      name="address"
-                      placeholder="1137 Williams Avenue"
-                      label="Your Address"
-                    />
-                  </div>
-                  <Input
-                    type="number"
-                    name="zip-code"
-                    placeholder="10001"
-                    label="ZIP Code"
-                  />
-                  <Input
-                    type="text"
-                    name="city"
-                    placeholder="New York"
-                    label="City"
-                  />
-                  <Input
-                    type="text"
-                    name="country"
-                    placeholder="United States"
-                    label="Country"
-                  />
-                </div>
-              </FormSection>
-              <FormSection title="Payment details">
-                <div className={styles.inputGrid}>
-                  <h2 className={styles.radioTitle}>Payment Method</h2>
-                  <Input type="radio" name="payment-method" label="e-Money" />
-                  <Input
-                    type="radio"
-                    name="payment-method"
-                    label="Cash on Delivery"
-                  />
-                </div>
-              </FormSection>
-              <div className={styles.inputGrid}>
-                <Input
-                  type="number"
-                  name="e-money-num"
-                  placeholder="238521993"
-                  label="e-Money Number"
-                />
-                <Input
-                  type="number"
-                  name="e-money-pin"
-                  placeholder="6891"
-                  label="e-Money PIN"
-                />
+              </div>
+
+              <div className={styles.orderSummary}>
+                <h2 className={styles.summaryTitle}>Summary</h2>
+                <ul className={styles.orderItems}>
+                  {cart.items.map((cartItem) => {
+                    return (
+                      <li key={cartItem.id}>
+                        <CartItem variant="checkout" {...cartItem} />
+                      </li>
+                    );
+                  })}
+                </ul>
+                <ul className={styles.orderInfo}>
+                  <li>
+                    <span className={styles.orderInfoText}>Total</span>
+                    <span className={styles.orderInfoValue}>
+                      $ {cartItemsTotal.toLocaleString('en-US')}
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.orderInfoText}>Shipping</span>
+                    <span className={styles.orderInfoValue}>
+                      $ {SHIPPING_PRICE}
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.orderInfoText}>VAT (included)</span>
+                    <span className={styles.orderInfoValue}>$ {vatValue}</span>
+                  </li>
+                  <li>
+                    <span className={styles.orderInfoText}>Grand total</span>
+                    <span className={styles.orderInfoValue}>
+                      $ {grandTotal}
+                    </span>
+                  </li>
+                </ul>
+                <Button
+                  type="submit"
+                  variant="filled"
+                  className={styles.checkoutBtn}
+                  disabled={isSubmitting || cartEmpty}
+                >
+                  Continue & pay
+                </Button>
               </div>
             </div>
           </div>
-
-          <div className={styles.orderSummary}>
-            <h2 className={styles.summaryTitle}>Summary</h2>
-            <ul className={styles.orderItems}>
-              {cart.items.map((cartItem) => {
-                return (
-                  <li key={cartItem.id}>
-                    <CartItem variant="checkout" {...cartItem} />
-                  </li>
-                );
-              })}
-            </ul>
-            <ul className={styles.orderInfo}>
-              <li>
-                <span className={styles.orderInfoText}>Total</span>
-                <span className={styles.orderInfoValue}>
-                  $ {cartItemsTotal.toLocaleString('en-US')}
-                </span>
-              </li>
-              <li>
-                <span className={styles.orderInfoText}>Shipping</span>
-                <span className={styles.orderInfoValue}>
-                  $ {SHIPPING_PRICE}
-                </span>
-              </li>
-              <li>
-                <span className={styles.orderInfoText}>VAT (included)</span>
-                <span className={styles.orderInfoValue}>$ {vatValue}</span>
-              </li>
-              <li>
-                <span className={styles.orderInfoText}>Grand total</span>
-                <span className={styles.orderInfoValue}>$ {grandTotal}</span>
-              </li>
-            </ul>
-            <Button
-              type="button"
-              variant="filled"
-              className={styles.checkoutBtn}
-            >
-              Continue & pay
-            </Button>
-          </div>
-        </div>
-      </div>
-    </form>
+        </Form>
+      )}
+    </Formik>
   );
 }
