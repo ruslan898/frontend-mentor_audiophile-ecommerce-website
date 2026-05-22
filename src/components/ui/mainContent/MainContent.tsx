@@ -17,14 +17,16 @@ export default function MainContent({ children }: MainContentProps) {
   const classes = clsx(
     styles.mainContent,
     (path === '/' || path.includes('category')) && styles.mainContentHome,
-    path === '/checkout' && styles.mainContentCheckout
+    path === '/checkout' && styles.mainContentCheckout,
   );
+
+  const modalVariant = path === '/checkout' ? 'center' : 'dropdown';
 
   return (
     <main className={classes}>
       {children}
-      <Modal isOpen={isOpen} onToggle={toggleOpen} variant="dropdown">
-        <CartModal />
+      <Modal isOpen={isOpen} onToggle={toggleOpen} variant={modalVariant}>
+        {modalVariant === 'dropdown' ? <CartModal /> : <CheckoutSuccessModal />}
       </Modal>
     </main>
   );

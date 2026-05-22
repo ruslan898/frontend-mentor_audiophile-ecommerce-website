@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import FormSection from './formSection/FormSection';
@@ -5,10 +6,12 @@ import Input from '../ui/input/Input';
 import styles from './Form.module.scss';
 import CartItem from '../ui/cartItem/CartItem';
 import Button from '../ui/button/Button';
+import { useModalContext } from '../../context/modal/ModalContext';
 import { useCartContext } from '../../context/cart/CartContext';
 import cashPaymentIcon from '/assets/checkout/icon-cash-on-delivery.svg';
 
 export default function CheckoutForm() {
+  const { toggleOpen } = useModalContext();
   const { cart, cartItemsTotal } = useCartContext();
 
   const cartEmpty = cart.items.length === 0;
@@ -18,6 +21,8 @@ export default function CheckoutForm() {
 
   const vatValue = Math.round(cartItemsTotal * VAT).toLocaleString('en-US');
   const grandTotal = (cartItemsTotal + SHIPPING_PRICE).toLocaleString('en-US');
+
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const ValidationSchema = Yup.object({
     name: Yup.string()
@@ -79,15 +84,13 @@ export default function CheckoutForm() {
         eMoneyPin: '',
       }}
       validationSchema={ValidationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={() => {
+        toggleOpen();
+        formRef.current?.reset();
       }}
     >
       {({ isSubmitting, values }) => (
-        <Form className={styles.form}>
+        <Form ref={formRef} className={styles.form}>
           <div className="container">
             <div className={styles.formWrapper}>
               <div className={styles.formInner}>

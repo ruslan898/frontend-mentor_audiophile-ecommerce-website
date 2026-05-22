@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './Modal.module.scss';
+import { useCartContext } from '../../../context/cart/CartContext';
 
 type ModalProps = {
   children: ReactNode;
@@ -17,6 +18,8 @@ export default function Modal({
   variant = 'dropdown',
 }: ModalProps) {
   const path = useLocation().pathname;
+
+  const { dispatch } = useCartContext();
 
   useEffect(() => {
     if (isOpen) {
@@ -35,8 +38,18 @@ export default function Modal({
     path === '/' && styles.modalWrapperHome,
   );
 
+  const checkoutModal = path === '/checkout';
+
   return (
-    <div className={styles.overlay} onClick={onToggle}>
+    <div
+      className={styles.overlay}
+      onClick={() => {
+        onToggle();
+        if (checkoutModal) {
+          dispatch({ type: 'clear-cart' });
+        }
+      }}
+    >
       <div className="container">
         <div className={modalWrapperClasses}>
           <div

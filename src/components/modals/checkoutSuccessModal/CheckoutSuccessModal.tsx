@@ -1,10 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../ui/button/Button';
 import Title from '../../ui/title/Title';
 import styles from './CheckoutSuccessModal.module.scss';
 import iconOrderConfirmation from '/assets/checkout/icon-order-confirmation.svg';
 import productImg from '/assets/cart/image-xx99-mark-two-headphones.jpg';
+import { useModalContext } from '../../../context/modal/ModalContext';
+import { useCartContext } from '../../../context/cart/CartContext';
 
 export default function CheckoutSuccessModal() {
+  const { toggleOpen } = useModalContext();
+  const navigate = useNavigate();
+  const { dispatch } = useCartContext();
+
   return (
     <div className={styles.checkoutSuccessModal}>
       <img
@@ -40,7 +47,16 @@ export default function CheckoutSuccessModal() {
           <p className={styles.totalPriceValue}>$ 5,446</p>
         </div>
       </div>
-      <Button href="/" variant="filled" className={styles.modalBtn}>
+      <Button
+        type="button"
+        variant="filled"
+        className={styles.modalBtn}
+        onClick={() => {
+          toggleOpen();
+          navigate('/');
+          dispatch({ type: 'clear-cart' });
+        }}
+      >
         Back to home
       </Button>
     </div>
