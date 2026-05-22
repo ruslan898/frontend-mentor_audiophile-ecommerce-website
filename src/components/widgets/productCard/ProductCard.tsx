@@ -23,6 +23,7 @@ export default function ProductCard({ productData }: ProductCardProps) {
         {name}
       </Title>
       <Button
+        type='link'
         href={`/product-detail/${slug}`}
         variant="filled"
         className={styles.cardBtn}
