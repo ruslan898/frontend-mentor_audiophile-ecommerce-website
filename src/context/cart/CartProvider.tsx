@@ -52,7 +52,7 @@ function reducer(state: Cart, action: Action): Cart {
               return cartItem;
             }
           })
-        : [...state.items, item];
+        : [...state.items, { ...item, quantity: quantity }];
       saveDataToLocalStorage('cart', updatedItems);
       return { items: updatedItems };
     }

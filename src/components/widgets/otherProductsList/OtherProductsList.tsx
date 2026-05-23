@@ -17,7 +17,7 @@ export default function OtherProductsList({ dataArr }: OtherProductsListProps) {
           </Title>
           <ul className={styles.otherProductsList}>
             {dataArr.map((obj: OtherProduct) => (
-              <li>
+              <li key={obj.name}>
                 <ProductCard productData={obj} />
               </li>
             ))}

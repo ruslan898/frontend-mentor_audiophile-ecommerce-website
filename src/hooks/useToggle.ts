@@ -15,7 +15,7 @@ export function useToggle({
   const [isOpen, setIsOpen] = useState(initialValue);
 
   function toggleOpen() {
-    setIsOpen((prev) => (prev === false ? true : false));
+    setIsOpen((prev) => !prev);
   }
 
   return { isOpen, toggleOpen };
