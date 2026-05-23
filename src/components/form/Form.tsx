@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import FormSection from './formSection/FormSection';
@@ -16,8 +15,6 @@ export default function CheckoutForm() {
     useCartContext();
 
   const cartEmpty = cart.items.length === 0;
-
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   const ValidationSchema = Yup.object({
     name: Yup.string()
@@ -79,13 +76,13 @@ export default function CheckoutForm() {
         eMoneyPin: '',
       }}
       validationSchema={ValidationSchema}
-      onSubmit={() => {
+      onSubmit={(_, { resetForm }) => {
         openModal('center');
-        formRef.current?.reset();
+        resetForm();
       }}
     >
       {({ isSubmitting, values }) => (
-        <Form ref={formRef} className={styles.form}>
+        <Form className={styles.form}>
           <div className="container">
             <div className={styles.formWrapper}>
               <div className={styles.formInner}>
