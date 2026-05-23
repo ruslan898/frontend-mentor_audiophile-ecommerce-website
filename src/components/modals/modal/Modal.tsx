@@ -1,6 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
 import styles from './Modal.module.scss';
-import { useCartContext } from '../../../context/cart/CartContext';
 import type { ModalVariant } from '../../../context/modal/ModalProvider';
 
 type ModalProps = {
@@ -8,6 +7,7 @@ type ModalProps = {
   isOpen: boolean;
   closeModal: () => void;
   variant: ModalVariant;
+  onOverlayClick?: () => void;
 };
 
 export default function Modal({
@@ -15,9 +15,8 @@ export default function Modal({
   isOpen,
   closeModal,
   variant,
+  onOverlayClick,
 }: ModalProps) {
-  const { dispatch } = useCartContext();
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -37,8 +36,8 @@ export default function Modal({
       className={styles.overlay}
       onClick={() => {
         closeModal();
-        if (checkoutModal) {
-          dispatch({ type: 'clear-cart' });
+        if (checkoutModal && onOverlayClick) {
+          onOverlayClick();
         }
       }}
     >
