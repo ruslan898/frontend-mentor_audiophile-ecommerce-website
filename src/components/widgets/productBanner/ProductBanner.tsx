@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './ProductBanner.module.scss';
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
-import { getImgPathsObj } from '../../../utils';
+import { getImgPathsObj } from '../../../utils/utils';
 import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
 import imagePrimaryMobile from '/assets/home/mobile/image-speaker-zx9.png';
 import imagePrimaryTablet from '/assets/home/tablet/image-speaker-zx9.png';

@@ -2,7 +2,7 @@ import { useRouteLoaderData } from 'react-router-dom';
 import Header from '../header/Header';
 import Title from '../../ui/title/Title';
 import Button from '../../ui/button/Button';
-import { getImgPathsObj } from '../../../utils';
+import { getImgPathsObj } from '../../../utils/utils';
 import { useImageByScreenSize } from '../../../hooks/useImageByScreenSize';
 import styles from './HeroSection.module.scss';
 import heroImageMobile from '/assets/home/mobile/image-header.jpg';

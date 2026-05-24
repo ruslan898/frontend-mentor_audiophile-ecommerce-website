@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import Category from '../pages/Category';
 import ProductDetail from '../pages/ProductDetail';
 import Checkout from '../pages/Checkout';
-import { loader } from '../utils';
+import { loader } from '../utils/utils';
 
 export const router = createBrowserRouter([
   {
