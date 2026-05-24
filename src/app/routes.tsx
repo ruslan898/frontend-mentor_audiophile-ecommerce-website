@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Category from '../pages/Category';
 import ProductDetail from '../pages/ProductDetail';
 import Checkout from '../pages/Checkout';
+import ErrorPage from '../pages/ErrorPage';
 import { loader } from '../utils/utils';
 
 export const router = createBrowserRouter([
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     id: 'root-route',
     loader: loader,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

@@ -1,0 +1,10 @@
+.error {
+  padding-top: 150px;
+  text-align: center;
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
