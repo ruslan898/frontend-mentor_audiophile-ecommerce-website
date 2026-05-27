@@ -1,15 +1,15 @@
 import Title from '../../ui/title/Title';
-import styles from './ErrorPageContent.module.scss';
+import styles from './ErrorBoundary.module.scss';
 
-type ErrorPageContentProps = {
+type ErrorBoundaryProps = {
   title: string;
   message: string;
 };
 
-export default function ErrorPageContent({
+export default function ErrorBoundary({
   title,
   message,
-}: ErrorPageContentProps) {
+}: ErrorBoundaryProps) {
   return (
     <section className={styles.error}>
       <div className="container">
